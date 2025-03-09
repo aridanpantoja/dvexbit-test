@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
-import { Outfit } from 'next/font/google'
+import { Red_Hat_Display as RedHatDisplay } from 'next/font/google'
 import './globals.css'
 import { Providers } from '@/providers'
 import { cn } from '@/lib/utils'
+import { Navbar } from '@/components/navbar'
 
-const outfit = Outfit({ subsets: ['latin'] })
+const redHatDisplay = RedHatDisplay({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'DvexFlow',
@@ -18,8 +19,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={cn('min-h-screen antialiased', outfit.className)}>
-        <Providers>{children}</Providers>
+      <body className={cn('min-h-screen antialiased', redHatDisplay.className)}>
+        <Providers>
+          <div className="flex h-full w-full flex-col">
+            <Navbar />
+            <main className="flex-1">{children}</main>
+          </div>
+        </Providers>
       </body>
     </html>
   )
