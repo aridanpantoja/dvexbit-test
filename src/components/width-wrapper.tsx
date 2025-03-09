@@ -10,7 +10,7 @@ export function WidthWrapper({
 }: WidthWrapperProps) {
   return (
     <div
-      className={cn('mx-auto max-w-screen-2xl px-3 md:px-6', className)}
+      className={cn('mx-auto max-w-screen-xl px-3 md:px-6', className)}
       {...props}
     >
       {children}
