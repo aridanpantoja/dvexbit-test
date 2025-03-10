@@ -1,9 +1,8 @@
+import { cn } from '@/lib/utils'
+import { Providers } from '@/providers'
 import type { Metadata } from 'next'
 import { Red_Hat_Display as RedHatDisplay } from 'next/font/google'
 import './globals.css'
-import { Providers } from '@/providers'
-import { cn } from '@/lib/utils'
-import { Navbar } from '@/components/navbar'
 
 const redHatDisplay = RedHatDisplay({ subsets: ['latin'] })
 
@@ -22,7 +21,6 @@ export default function RootLayout({
       <body className={cn('min-h-screen antialiased', redHatDisplay.className)}>
         <Providers>
           <div className="flex h-full w-full flex-col">
-            <Navbar />
             <main className="flex-1">{children}</main>
           </div>
         </Providers>
