@@ -1,10 +1,12 @@
 'use client'
 
-import { ColumnHeader } from '@/components/tasks/column-header'
-import { RowActions } from '@/components/tasks/row-actions'
+import { ColumnHeader } from '@/components/data-table/column-header'
+import { RowActions } from '@/components/data-table/row-actions'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Task } from '@/data/schema'
+import { capitalize } from '@/lib/utils'
 import { ColumnDef } from '@tanstack/react-table'
+import { ALargeSmall, CalendarDays, CircleDashed } from 'lucide-react'
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -33,35 +35,37 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: 'title',
-    header: ({ column }) => <ColumnHeader column={column} title="Title" />,
+    header: ({ column }) => (
+      <ColumnHeader column={column} title="Title" icon={ALargeSmall} />
+    ),
     cell: ({ row }) => (
       <div className="flex">
-        <span className="max-w-[250px] truncate font-semibold">
+        <span className="w-full truncate font-semibold">
           {row.getValue('title')}
         </span>
       </div>
     ),
   },
   {
-    accessorKey: 'description',
+    accessorKey: 'status',
     header: ({ column }) => (
-      <ColumnHeader column={column} title="Description" />
+      <ColumnHeader column={column} title="Status" icon={CircleDashed} />
     ),
     cell: ({ row }) => (
-      <div className="flex">
-        <span className="w-full max-w-[400px] truncate">
-          {row.getValue('description')}
-        </span>
+      <div className="flex w-fit items-center gap-1.5 rounded-full bg-red-300 px-2.5 py-0.5">
+        <div className="size-2.5 rounded-full bg-red-500"></div>
+        {capitalize(row.getValue('status'))}
       </div>
     ),
-  },
-  {
-    accessorKey: 'status',
-    header: ({ column }) => <ColumnHeader column={column} title="Status" />,
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id))
+    },
   },
   {
     accessorKey: 'taskDate',
-    header: ({ column }) => <ColumnHeader column={column} title="Due date" />,
+    header: ({ column }) => (
+      <ColumnHeader column={column} title="Due date" icon={CalendarDays} />
+    ),
   },
   {
     id: 'actions',
