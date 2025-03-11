@@ -18,7 +18,7 @@ import { TooltipWrapper } from '@/components/ui/tooltip'
 import { statuses } from '@/data/data'
 import { cn } from '@/lib/utils'
 
-interface FilterActionsProps<TData, TValue> {
+type FilterActionsProps<TData, TValue> = {
   column?: Column<TData, TValue>
 }
 

@@ -29,9 +29,7 @@ export default function Home() {
               width={80}
               height={80}
             />
-            <h1 className="text-4xl font-black tracking-tight">
-              DvexFlow - Manage tasks efficiently.
-            </h1>
+            <h1>DvexFlow - Manage tasks efficiently.</h1>
             <p className="text-muted-foreground text-lg">
               DvexFlow is a modern and intuitive task management platform
               designed to optimize productivity and organization for teams and
