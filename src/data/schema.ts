@@ -7,7 +7,6 @@ export type Task = {
   description: string
   taskDate: string
   status: 'todo' | 'in progress' | 'done'
-  email: string
   createdAt: number
   updatedAt: number
 }

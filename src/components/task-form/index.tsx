@@ -1,10 +1,12 @@
 'use client'
 
+import { v4 as uuidv4 } from 'uuid'
+
 import { DateField } from '@/components/task-form/date-field'
 import { DescriptionField } from '@/components/task-form/description-field'
 import { StatusField } from '@/components/task-form/status-field'
 import { TitleField } from '@/components/task-form/title-field'
-import { Button, buttonVariants } from '@/components/ui/button'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogContent,
@@ -15,44 +17,84 @@ import {
 } from '@/components/ui/dialog'
 import { Form } from '@/components/ui/form'
 import { Task, taskFormSchema, TaskFormValues } from '@/data/schema'
+import { createTask, updateTask } from '@/server/tasks'
 import { zodResolver } from '@hookform/resolvers/zod'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { Pencil, Plus } from 'lucide-react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 
 type TaskFormProps = {
   task?: Task
-  onTaskCreated?: (
-    task: Omit<Task, 'id' | 'email' | 'createdAt' | 'updatedAt'>,
-  ) => void
-  onTaskUpdated?: (
-    taskId: string,
-    updates: Partial<Omit<Task, 'id' | 'email' | 'createdAt' | 'updatedAt'>>,
-  ) => void
 }
 
-export function TaskForm({
-  task,
-  onTaskCreated,
-  onTaskUpdated,
-}: TaskFormProps) {
+export function TaskForm({ task }: TaskFormProps) {
   const [isOpen, setIsOpen] = useState(false)
+  const queryClient = useQueryClient()
   const isEditMode = !!task
+
   const form = useForm<TaskFormValues>({
     resolver: zodResolver(taskFormSchema),
     defaultValues: {
-      title: task?.title || '',
-      description: task?.description || '',
-      taskDate: task?.taskDate || '',
-      status: task?.status || 'todo',
+      title: '',
+      description: '',
+      taskDate: '',
+      status: 'todo',
+    },
+  })
+
+  useEffect(() => {
+    if (isOpen) {
+      form.reset({
+        title: task?.title || '',
+        description: task?.description || '',
+        taskDate: task?.taskDate || '',
+        status: task?.status || 'todo',
+      })
+    }
+  }, [isOpen, task, form])
+
+  const createMutation = useMutation({
+    mutationFn: createTask,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['get-all-tasks'] })
+    },
+  })
+
+  const editMutation = useMutation({
+    mutationFn: updateTask,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['get-task-by-id'],
+      })
     },
   })
 
   function onSubmit(values: TaskFormValues) {
-    if (isEditMode && task && onTaskUpdated) {
-      onTaskUpdated(task.id, values)
-    } else if (onTaskCreated) {
-      onTaskCreated(values)
+    const { success, data } = taskFormSchema.safeParse(values)
+
+    if (!success) return null
+
+    if (!isEditMode) {
+      const newTask = {
+        ...data,
+        id: uuidv4(),
+        createdAt: new Date().getTime(),
+        updatedAt: new Date().getTime(),
+      } as Task
+
+      createMutation.mutate(newTask)
+    }
+
+    if (isEditMode) {
+      const updatedTask = {
+        ...data,
+        id: task.id,
+        createdAt: task.createdAt,
+        updatedAt: new Date().getTime(),
+      } as Task
+
+      editMutation.mutate(updatedTask)
     }
 
     setIsOpen(false)
@@ -61,15 +103,15 @@ export function TaskForm({
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger className={buttonVariants()}>
+      <DialogTrigger asChild>
         {isEditMode ? (
-          <>
+          <Button size="sm">
             <Pencil /> Edit Task
-          </>
+          </Button>
         ) : (
-          <>
+          <Button>
             <Plus /> Add Task
-          </>
+          </Button>
         )}
       </DialogTrigger>
       <DialogContent>

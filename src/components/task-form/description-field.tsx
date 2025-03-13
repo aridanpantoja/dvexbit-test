@@ -19,7 +19,7 @@ export function DescriptionField({ control }: TaskFormFieldProps) {
           <FormControl>
             <Textarea
               placeholder="Describe your task"
-              className="col-span-2 max-h-[80px] resize-none"
+              className="max-h-[80px] resize-none"
               {...field}
             />
           </FormControl>
