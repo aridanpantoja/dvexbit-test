@@ -124,6 +124,6 @@
     @apply bg-background text-foreground;
   }
   h1 {
-    @apply text-4xl font-black tracking-tight;
+    @apply text-3xl md:text-4xl font-black tracking-tight;
   }
 }

@@ -21,7 +21,9 @@ export default function RootLayout({
       <body className={cn('min-h-screen antialiased', redHatDisplay.className)}>
         <Providers>
           <div className="flex h-full w-full flex-col">
-            <main className="flex-1">{children}</main>
+            <main className="my-12 h-full flex-1 grow md:my-24">
+              {children}
+            </main>
           </div>
         </Providers>
       </body>

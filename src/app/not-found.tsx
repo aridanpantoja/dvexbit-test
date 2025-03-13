@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 export default function NotFound() {
   return (
-    <section className="">
+    <section className="absolute top-1/2 right-1/2 translate-x-1/2 -translate-y-1/2">
       <WidthWrapper>
         <div className="flex flex-col items-center justify-center gap-6">
           <Image
