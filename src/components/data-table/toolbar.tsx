@@ -1,8 +1,8 @@
 import { FilterActions } from '@/components/data-table/filter-actions'
-import { Button } from '@/components/ui/button'
+import { TaskForm } from '@/components/task-form'
 import { Input } from '@/components/ui/input'
 import { Table } from '@tanstack/react-table'
-import { Plus, Search } from 'lucide-react'
+import { Search } from 'lucide-react'
 
 type ToolbarProps<TData> = {
   table: Table<TData>
@@ -29,10 +29,7 @@ export function Toolbar<TData>({ table }: ToolbarProps<TData>) {
 
       <div className="flex gap-2">
         <FilterActions column={table.getColumn('status')} />
-
-        <Button>
-          <Plus /> Add Task
-        </Button>
+        <TaskForm />
       </div>
     </div>
   )

@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<h1>Harpia 🦅</h1> 
 
-## Getting Started
+<p>
+    <b>Repositório criado para o projeto de teste de desenvolvedor front-end júnior da Dvexbit.</b>
+</p>
 
-First, run the development server:
+<h2 id="tech-stack">Tech Stack 💻</h2>
+
+[![My Skills](https://skillicons.dev/icons?i=nodejs,react,nextjs,ts,tailwind,jest,git,github,vscode)](https://skillicons.dev)
+
+<h2 id="project-overview">Project Overview 📋</h2>
+
+### Getting Started
+
+#### 1. Install required dependencies with pnpm
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+#### 2. Running the development server
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+<h2 id="contribute">Contribute 🚀</h2>
 
-## Learn More
+If you want to contribute, clone this repo, create your work branch and get your hands dirty!
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+git clone https://github.com/aridanpantoja/dvexbit-test.git
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+git checkout -b feature/NAME
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+At the end, open a Pull Request explaining the problem solved or feature made, if exists, append screenshot of visual modifications and wait for the review!
 
-## Deploy on Vercel
+### Documentations that might help
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+[📝 How to create a Pull Request](https://www.atlassian.com/br/git/tutorials/making-a-pull-request) |
+[💾 Commit pattern](https://gist.github.com/joshbuchea/6f47e86d2510bce28f8e7f42ae84c716)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+<h2 id="license">License 📃 </h2>
+
+This project is under [MIT](./LICENSE) license
