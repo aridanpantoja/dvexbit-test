@@ -3,12 +3,18 @@ import { Providers } from '@/providers'
 import type { Metadata } from 'next'
 import { Red_Hat_Display as RedHatDisplay } from 'next/font/google'
 import './globals.css'
+import { siteConfig } from '@/config'
 
 const redHatDisplay = RedHatDisplay({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'DvexFlow',
-  description: 'Manage your tasks efficiently and in a personalized way.',
+  title: siteConfig.name,
+  description: siteConfig.description,
+  authors: [{ name: 'Aridan Pantoja', url: 'https://aridan.dev' }],
+  icons: '/favicon.ico',
+  generator: 'Next.js',
+  category: 'website',
+  manifest: '/manifest.json',
 }
 
 export default function RootLayout({
