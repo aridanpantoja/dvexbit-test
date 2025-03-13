@@ -1,27 +1,25 @@
 'use client'
 
+import { getAllTasks } from '@/client/tasks'
 import { DataTable } from '@/components/data-table'
 import { columns } from '@/components/data-table/columns'
+import { Loading } from '@/components/loading'
 import { WidthWrapper } from '@/components/width-wrapper'
 import { useQuery } from '@tanstack/react-query'
 import Image from 'next/image'
 
 export default function Home() {
   const { data: tasks, isLoading } = useQuery({
-    queryKey: ['get-tasks'],
-    queryFn: async () => {
-      const response = await fetch('http://localhost:3333/tasks')
-      const data = await response.json()
-      return data
-    },
+    queryKey: ['get-all-tasks'],
+    queryFn: getAllTasks,
   })
 
-  if (isLoading) return null
+  if (isLoading) return <Loading />
 
   return (
     <>
       <WidthWrapper>
-        <div className="my-24 space-y-6">
+        <div className="space-y-6">
           <div className="flex flex-col gap-5">
             <Image
               src="/images/check-mark.webp"
@@ -37,7 +35,7 @@ export default function Home() {
               filtering, the tool enables efficient workflow tracking.
             </p>
           </div>
-          <DataTable columns={columns} data={tasks} />
+          {tasks && <DataTable columns={columns} data={tasks} />}
         </div>
       </WidthWrapper>
     </>

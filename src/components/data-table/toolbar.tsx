@@ -10,8 +10,8 @@ type ToolbarProps<TData> = {
 
 export function Toolbar<TData>({ table }: ToolbarProps<TData>) {
   return (
-    <div className="flex items-center justify-between">
-      <div className="relative flex w-full items-center sm:max-w-[400px]">
+    <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="relative flex w-full max-w-[200px] items-center">
         <Input
           placeholder="Search"
           value={(table.getColumn('title')?.getFilterValue() as string) ?? ''}

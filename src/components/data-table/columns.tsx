@@ -1,6 +1,7 @@
 'use client'
 
 import { ColumnHeader } from '@/components/data-table/column-header'
+import { TaskDate } from '@/components/data-table/task-date'
 import { statuses } from '@/data/data'
 import { Task } from '@/data/schema'
 import { getDaysRemaining } from '@/lib/utils'
@@ -58,12 +59,6 @@ export const columns: ColumnDef<Task>[] = [
         </div>
       )
     },
-    // cell: ({ row }) => (
-    //   <div className="flex w-fit items-center gap-1.5 rounded-full bg-red-300 px-2.5 py-0.5">
-    //     <div className="size-2.5 rounded-full bg-red-500"></div>
-    //     {capitalize(row.getValue('status'))}
-    //   </div>
-    // ),
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id))
     },
@@ -77,23 +72,7 @@ export const columns: ColumnDef<Task>[] = [
       const taskDate = new Date(row.original.taskDate)
       const daysRemaining = getDaysRemaining(taskDate)
 
-      if (daysRemaining > 0) {
-        return (
-          <div className="font-medium">
-            {daysRemaining === 1 ? '1 day left' : `${daysRemaining} days left`}
-          </div>
-        )
-      } else if (daysRemaining === 0) {
-        return <div className="font-medium">Due today!</div>
-      } else {
-        return (
-          <div className="font-medium">
-            {Math.abs(daysRemaining) === 1
-              ? 'Expired (1 day ago)'
-              : `Expired (${Math.abs(daysRemaining)} days ago)`}
-          </div>
-        )
-      }
+      return <TaskDate daysRemaining={daysRemaining} />
     },
   },
 ]
