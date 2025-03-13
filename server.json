@@ -1,0 +1,13 @@
+{
+  "tasks": [
+    {
+      "title": "Finalizar documentação do projeto",
+      "description": "Documentar os processos de desenvolvimento e decisões tomadas durante o projeto.",
+      "taskDate": "2025-03-10T09:00:00Z",
+      "status": "in progress",
+      "id": "d4a7bfb2-4ff2-46c5-bc55-1ad3ecbda722",
+      "createdAt": 1678313425000,
+      "updatedAt": 1741846387454
+    }
+  ]
+}
